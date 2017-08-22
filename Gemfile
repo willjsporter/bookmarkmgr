@@ -1,5 +1,11 @@
 source 'https://rubygems.org'
+
 ruby '2.4.1'
-gem 'RSpec/Capybara'
-gem 'DataMapper'
+
+gem 'rspec'
+gem 'capybara'
+gem 'datamapper'
 gem 'dm-postgres-adapter'
+gem 'sinatra'
+gem 'shotgun'
+gem 'rackup'
