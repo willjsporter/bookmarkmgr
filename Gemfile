@@ -1,0 +1,5 @@
+source 'https://rubygems.org'
+ruby '2.4.1'
+gem 'RSpec/Capybara'
+gem 'DataMapper'
+gem 'dm-postgres-adapter'
