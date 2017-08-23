@@ -5,6 +5,7 @@ require_relative '../app'
 require 'rspec'
 require 'capybara'
 require 'capybara/rspec'
+require 'launchy'
 
 Capybara.app = BookmarkManager
 
@@ -109,5 +110,3 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 end
-
-
