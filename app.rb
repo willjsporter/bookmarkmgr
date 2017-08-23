@@ -3,6 +3,10 @@ require_relative './models/link'
 
 class BookmarkManager < Sinatra::Base
 
+  get '/' do
+    redirect '/links'
+  end
+
   get '/links' do
     @link_ary=[]
     @links = Link.all
@@ -10,6 +14,14 @@ class BookmarkManager < Sinatra::Base
         @link_ary << link.title.to_s
     end
     erb :links
+  end
+
+  get '/links/new' do
+    erb :newlink
+  end
+
+  post '/links' do
+    "Hello world"
   end
 
   run! if app_file == $PROGRAM_NAME
