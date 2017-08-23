@@ -1,17 +1,27 @@
 require_relative '../models/link'
 
 
+
 describe BookmarkManager do
+
+ # DatabaseCleaner.strategy = :truncation
+
+  before do
+    DatabaseCleaner.start
+  end
+
+  after do
+    DatabaseCleaner.clean
+  end
 
   feature 'Viewing Links' do
     scenario "#has a list of links" do
-      link = Link.create(url: 'makersacademy.com', title: "Makaz")
+      Link.create(url: 'makersacademy.com', title: "Makaz")
       visit '/links'
       expect(page.status_code).to eq 200
       # within 'ul#linklist' do
         expect(page).to have_content("Makaz")
       # end
-      link.destroy
     end
   end
 

@@ -3,12 +3,15 @@ ENV['RACK_ENV'] = 'test'
 
 require_relative '../app'
 require 'rspec'
+require 'database_cleaner'
 require 'capybara'
 require 'capybara/rspec'
 require 'launchy'
 
-#Capybara.save_and_open_page_path = '/Users/stephengeller/Library/Mobile Documents/com~apple~CloudDocs/Projects/makers-academy/week-4/day-3/bookmarkmgr/logs'
-Capybara.save_path = '/Users/will/Projects/MA-COURSE/week4/week_4_challenge/logs'
+
+
+Capybara.save_path = '/Users/stephengeller/Library/Mobile Documents/com~apple~CloudDocs/Projects/makers-academy/week-4/day-3/bookmarkmgr/logs'
+#Capybara.save_path = '/Users/will/Projects/MA-COURSE/week4/week_4_challenge/logs'
 Capybara.app = BookmarkManager
 
 
@@ -40,6 +43,11 @@ RSpec.configure do |config|
     # ...rather than:
     #     # => "be bigger than 2"
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
+  end
+
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
   end
 
   # rspec-mocks config goes here. You can use an alternate test double
