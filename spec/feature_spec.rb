@@ -8,7 +8,6 @@ describe BookmarkManager do
       link = Link.create(url: 'makersacademy.com', title: "Makaz")
       visit '/links'
       expect(page.status_code).to eq 200
-
       # within 'ul#linklist' do
         expect(page).to have_content("Makaz")
       # end
@@ -18,12 +17,21 @@ describe BookmarkManager do
 
 
   feature 'creating links' do
-    scenario 'has a form' do
+    before do
       visit '/links/new'
-      save_and_open_page
+    end
+
+    scenario 'has a form' do
       expect(page).to have_field('title')
       expect(page).to have_field('url')
       expect(page).to have_selector('input[type=submit][value="Submit"]')
+    end
+
+    scenario 'links go to database' do
+      expect(Link).to receive(:create).with(title: "BBCtest3", url: "http://bbc.co.uk")
+      fill_in('title',with: 'BBCtest3')
+      fill_in('url',with: "http://bbc.co.uk")
+      click_button('Submit')
     end
   end
 

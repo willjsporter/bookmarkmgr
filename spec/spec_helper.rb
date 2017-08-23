@@ -7,7 +7,8 @@ require 'capybara'
 require 'capybara/rspec'
 require 'launchy'
 
-Capybara.save_and_open_page_path = '/Users/stephengeller/Library/Mobile Documents/com~apple~CloudDocs/Projects/makers-academy/week-4/day-3/bookmarkmgr/logs'
+#Capybara.save_and_open_page_path = '/Users/stephengeller/Library/Mobile Documents/com~apple~CloudDocs/Projects/makers-academy/week-4/day-3/bookmarkmgr/logs'
+Capybara.save_path = '/Users/will/Projects/MA-COURSE/week4/week_4_challenge/logs'
 Capybara.app = BookmarkManager
 
 

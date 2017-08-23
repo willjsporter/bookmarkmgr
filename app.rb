@@ -22,6 +22,7 @@ class BookmarkManager < Sinatra::Base
 
   post '/links' do
     "Hello world"
+    Link.create(:title=>params[:title], :url=>params[:url])
   end
 
   run! if app_file == $PROGRAM_NAME
