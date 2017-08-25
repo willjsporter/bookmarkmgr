@@ -1,13 +1,15 @@
 require 'data_mapper'
 require  'dm-migrations'
 
-class Link
+class Tag
   include DataMapper::Resource
 
   property :id,    Serial
-  property :title, String
-  property :url,   String
+  property :tagname, String
+  property :title,   String
 end
+
+
 
 
 

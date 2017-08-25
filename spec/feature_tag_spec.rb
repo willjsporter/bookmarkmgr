@@ -5,7 +5,7 @@
       Link.create(url: 'makersacademy.com', title: "Makaz")
       visit '/'
       click_button('Create new tag')
-      save_and_open_page
+      # save_and_open_page
       fill_in("title",with: "Makaz")
       fill_in("tagname",with: 'Coding')
       click_button('Submit')
