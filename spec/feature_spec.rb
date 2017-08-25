@@ -31,8 +31,20 @@ describe BookmarkManager do
       expect(Link).to receive(:create).with(title: "BBCtest3", url: "http://bbc.co.uk")
       fill_in('title',with: 'BBCtest3')
       fill_in('url',with: "http://bbc.co.uk")
+      fill_in('tags',with: "website!!!")
       click_button('Submit')
     end
   end
 
+  feature 'creating tags' do
+
+    scenario 'adding a link + tag through our page' do
+      visit '/links/new'
+      fill_in('title',with: 'BBCtest3')
+      fill_in('url',with: "http://bbc.co.uk")
+      fill_in('tags',with: "useful test website")
+      click_button('Submit')
+      expect(page).to have_content("useful test website")
+    end
   end
+end

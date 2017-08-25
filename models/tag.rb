@@ -6,10 +6,8 @@ class Tag
 
   property :id,    Serial
   property :tagname, String
-  property :title,   String
+  has n, :links, through: Resource
 end
-
-
 
 
 

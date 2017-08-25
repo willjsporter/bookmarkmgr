@@ -1,12 +1,10 @@
 require 'sinatra/base'
-require 'data_mapper'
-require  'dm-migrations'
-DataMapper.setup(:default, ENV['DATABASE_URL']||"postgres://localhost/bookmark_manager_#{ENV['RACK_ENV']}")
-require_relative './models/link'
-require_relative './models/tag'
-# require 'data_mapper_setup'
-DataMapper.finalize
-DataMapper.auto_upgrade!
+# require 'data_mapper'
+# require  'dm-migrations'
+# require_relative './models/link'
+# require_relative './models/tag'
+require_relative 'data_mapper_setup'
+
 
 ENV['RACK_ENV'] ||= 'development'
 
@@ -20,13 +18,13 @@ class BookmarkManager < Sinatra::Base
     @link_ary=[]
     @links = Link.all
     @links.each do |link|
-        @link_ary << link.title#.to_s
+        @link_ary << "#{link.title} - #{link.tags}"
     end
-    @tag_ary=[]
-    @tags = Tag.all
-    @tags.each do |tag|
-        @tag_ary << tag.tagname#.to_s
-    end
+    # @tag_ary=[]
+    # @tags = Tag.all
+    # @tags.each do |tag|
+    #     @tag_ary << tag.tagname#.to_s
+    # end
 
     erb :links
   end
@@ -36,17 +34,21 @@ class BookmarkManager < Sinatra::Base
   end
 
   post '/links' do
-    Link.create(:title=>params[:title], :url=>params[:url])
-  end
-
-  get '/tags/new' do
-    erb :newtag
-  end
-
-  post '/tags' do
-    Tag.create(:title=>params[:title], :tagname=>params[:tagname])
+    link=Link.create(:title=>params[:title], :url=>params[:url])
+    tag=Tag.create(tagname: params[:tags])
+    link.tags << tag
+    link.save
     redirect '/links'
   end
+
+  # get '/tags/new' do
+  #   erb :newtag
+  # end
+  #
+  # post '/tags' do
+  #   Tag.create(:tagname=>params[:tagname])
+  #   redirect '/links'
+  # end
 
   run! if app_file == $PROGRAM_NAME
 end
