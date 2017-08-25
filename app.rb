@@ -26,5 +26,13 @@ class BookmarkManager < Sinatra::Base
     Link.create(:title=>params[:title], :url=>params[:url])
   end
 
+  get '/tags/new' do
+    erb :newtag
+  end
+
+  post '/tags' do
+    Tag.create(:title=>params[:title], :tagname=>params[:tagname])
+  end
+
   run! if app_file == $PROGRAM_NAME
 end
